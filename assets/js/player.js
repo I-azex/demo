@@ -8,14 +8,16 @@
   var $ = NEFOR.$;
 
   var TRACKS = [
-    { file: 'assets/audio/andy-warhol.mp3', title: 'ANDY WARHOL', artist: 'KAI ANGEL', label: 'ПЛЁНКА · 01' },
-    { file: 'assets/audio/dinastiya.mp3', title: 'ДИНАСТИЯ', artist: 'VILLIAN × MADK1D', label: 'ПЛЁНКА · 02' },
-    { file: 'assets/audio/paris-love.mp3', title: 'PARISLOVE', artist: 'FORTUNA812', label: 'ПЛЁНКА · 03' }
+    { file: 'assets/audio/andy-warhol.mp3', title: 'ANDY WARHOL', artist: 'KAI ANGEL', dur: '2:56', label: 'ПЛЁНКА · 01' },
+    { file: 'assets/audio/dinastiya.mp3', title: 'ДИНАСТИЯ', artist: 'VILLIAN × MADK1D', dur: '2:30', label: 'ПЛЁНКА · 02' },
+    { file: 'assets/audio/paris-love.mp3', title: 'PARISLOVE', artist: 'FORTUNA812', dur: '1:51', label: 'ПЛЁНКА · 03' }
   ];
 
   var audio = null, actx = null, analyser = null, source = null, freq = null, raf = 0;
   var current = 0, playing = false, userVolume = 0.82, deck = null, viz = null, vctx = null, vw = 0, vh = 0;
   var timeEl, durEl, seekEl, playBtn, prevBtn, nextBtn, trackListEl, titleEl, artistEl, volEl;
+  var kLine = null, kPrev = null, kNext = null, kProgress = null, kStatus = null;
+  var karaokeLines = [], karaokeIdx = -1;
 
   function fmt(sec) {
     if (!isFinite(sec) || sec < 0) return '0:00';
@@ -59,7 +61,7 @@
     raf = 0;
     if (!vctx) return;
     vctx.clearRect(0, 0, vw, vh);
-    if (!analyser) { drawIdle(); return; }
+    if (!analyser) { drawIdle(); karaokeTick(audio.currentTime); return; }
     analyser.getByteFrequencyData(freq);
     var bars = 56, gap = 2, bw = (vw - gap * (bars - 1)) / bars, mid = vh / 2;
     for (var i = 0; i < bars; i++) {
@@ -84,7 +86,65 @@
       if (j === 0) vctx.moveTo(px, py); else vctx.lineTo(px, py);
     }
     vctx.stroke();
+    karaokeTick(audio.currentTime);
     if (playing) raf = requestAnimationFrame(drawViz);
+  }
+
+  /* ─────────────────────────── КАРАОКЕ ─────────────────────────── */
+  function lyricsFor(track) {
+    var all = window.NEFOR_LYRICS || {};
+    return all[track.title] || null;
+  }
+  function setKaraoke(track) {
+    karaokeLines = lyricsFor(track) || [];
+    karaokeIdx = -2;
+    if (!kLine) return;
+    if (kStatus) kStatus.textContent = karaokeLines.length ? 'фрагменты · живой тайминг' : 'без текста';
+    if (!karaokeLines.length) {
+      kLine.textContent = 'текста нет. слушай сердцем';
+      kLine.style.setProperty('--p', '0%');
+      if (kPrev) kPrev.textContent = '';
+      if (kNext) kNext.textContent = '';
+      if (kProgress) kProgress.style.width = '0%';
+      return;
+    }
+    kLine.textContent = '…';
+    if (kPrev) kPrev.textContent = '';
+    if (kNext) kNext.textContent = karaokeLines[0].text;
+    karaokeTick(audio.currentTime || 0);
+  }
+  function renderKaraokeLine(idx) {
+    var cur = idx >= 0 ? karaokeLines[idx] : null;
+    var prev = idx > 0 ? karaokeLines[idx - 1] : null;
+    var next = idx >= 0 ? karaokeLines[idx + 1] : (karaokeLines[0] || null);
+    if (cur) {
+      kLine.textContent = cur.text;
+      kLine.classList.remove('is-bump');
+      void kLine.offsetWidth;
+      kLine.classList.add('is-bump');
+    } else {
+      kLine.textContent = '…';
+    }
+    if (kPrev) kPrev.textContent = prev ? prev.text : '';
+    if (kNext) kNext.textContent = next ? next.text : '';
+  }
+  function karaokeTick(time) {
+    if (!karaokeLines.length || !kLine) return;
+    time = time || 0;
+    var idx = -1;
+    for (var i = karaokeLines.length - 1; i >= 0; i--) { if (time >= karaokeLines[i].t) { idx = i; break; } }
+    if (idx !== karaokeIdx) { karaokeIdx = idx; renderKaraokeLine(idx); }
+    var cur = idx >= 0 ? karaokeLines[idx] : null;
+    var next = karaokeLines[idx + 1];
+    var p = 0;
+    if (cur) {
+      var start = cur.t;
+      var end = next ? next.t : (isFinite(audio.duration) ? audio.duration : start + 7);
+      p = Math.max(0, Math.min(1, (time - start) / Math.max(0.5, end - start)));
+    }
+    var pct = (p * 100).toFixed(1) + '%';
+    kLine.style.setProperty('--p', pct);
+    if (kProgress) kProgress.style.width = pct;
   }
 
   function resizeViz() {
@@ -112,27 +172,14 @@
       btn.innerHTML = '<span class="track__body"><span class="track__title"></span><span class="track__artist"></span></span><span class="track__dur">--:--</span>';
       $('.track__title', btn).textContent = t.title;
       $('.track__artist', btn).textContent = t.artist;
+      $('.track__dur', btn).textContent = t.dur;
       btn.addEventListener('click', function () {
         if (i === current && playing) { pause(); return; }
         setTrack(i, true);
       });
       li.appendChild(btn);
       trackListEl.appendChild(li);
-      probeDuration(t, btn);
     });
-  }
-
-  function probeDuration(t, btn) {
-    try {
-      var probe = new Audio();
-      probe.preload = 'metadata';
-      probe.src = t.file;
-      probe.addEventListener('loadedmetadata', function () {
-        var dur = $('.track__dur', btn);
-        if (dur && isFinite(probe.duration)) dur.textContent = fmt(probe.duration);
-      });
-      probe.load();
-    } catch (e) {}
   }
 
   function setTrack(i, autoplay) {
@@ -141,6 +188,7 @@
     audio.src = t.file;
     if (titleEl) titleEl.textContent = t.title;
     if (artistEl) artistEl.textContent = t.artist;
+    setKaraoke(t);
     NEFOR.$$('.track').forEach(function (el) {
       el.classList.toggle('is-active', el.getAttribute('data-track') === String(current));
     });
@@ -197,6 +245,11 @@
     titleEl = $('#deck-title');
     artistEl = $('#deck-artist');
     volEl = $('#vol');
+    kLine = $('#karaoke-line');
+    kPrev = $('#karaoke-prev');
+    kNext = $('#karaoke-next');
+    kProgress = $('#karaoke-progress');
+    kStatus = $('#karaoke-status');
     if (!deck || !viz) return;
     vctx = viz.getContext('2d');
     resizeViz();
@@ -225,6 +278,7 @@
         seekEl.value = Math.round(p * 10);
         seekEl.style.setProperty('--fill', p.toFixed(1) + '%');
       }
+      karaokeTick(audio.currentTime);
     });
     audio.addEventListener('ended', function () {
       setTrack(current + 1, true);
@@ -253,6 +307,13 @@
     renderTracks();
     setTrack(0, false);
     drawIdle();
+    NEFOR.audio = audio;
+    NEFOR.player = { play: play, pause: pause, setTrack: setTrack, getTrack: function () { return TRACKS[current]; } };
+    NEFOR.karaoke = {
+      tick: function () { karaokeTick(audio.currentTime); },
+      lines: function () { return karaokeLines; },
+      idx: function () { return karaokeIdx; }
+    };
 
     /* автопауза, если вкладка спрятана */
     document.addEventListener('visibilitychange', function () {

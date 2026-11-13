@@ -275,11 +275,11 @@
   var FX = (function () {
     var canvas = null, ctx = null, W = 0, H = 0, DPR = 1;
     var parts = [], raf = 0, running = false;
-    var MAX = 260;
+    var MAX = 130;
 
     function resize() {
       if (!canvas) return;
-      DPR = Math.min(2, window.devicePixelRatio || 1);
+      DPR = Math.min(1.5, window.devicePixelRatio || 1);
       W = window.innerWidth; H = window.innerHeight;
       canvas.width = Math.floor(W * DPR); canvas.height = Math.floor(H * DPR);
       canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
@@ -291,6 +291,10 @@
       ctx = canvas.getContext('2d');
       resize();
       window.addEventListener('resize', resize);
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) { if (raf) { cancelAnimationFrame(raf); raf = 0; } running = false; }
+        else if (parts.length) start();
+      });
     }
     function spawn(p) {
       if (reduced) return;
@@ -400,7 +404,7 @@
   NEFOR.rand = rand;
 
   /* ─────────────────────────── КУРСОР ─────────────────────────── */
-  var cursor = null, cursorActive = false, lastEmber = 0;
+  var cursor = null, lastEmber = 0;
   function initCursor() {
     if (reduced || window.matchMedia('(hover: none)').matches) return;
     cursor = document.createElement('div');
@@ -408,13 +412,35 @@
     cursor.setAttribute('aria-hidden', 'true');
     document.body.appendChild(cursor);
     document.body.classList.add('has-cursor');
-    cursorActive = true;
+    var themeScheduled = false, lastTheme = '';
+    var LIGHT_SEL = '.floor--quiz, .floor--stats, .frame, .polaroid, .rules, .quiz, .guest__form, .gate__card, .gate__joke, .street__card, .marquee--acid, .lightbox__cap, .lightbox__img, .btn--acid, .slot[aria-pressed="true"], .badge.is-on, .hero__sign';
+    function themeAt(x, y) {
+      var el;
+      try { el = document.elementFromPoint(x, y); } catch (e) { el = null; }
+      if (!el) return 'dark';
+      return el.closest(LIGHT_SEL) ? 'light' : 'dark';
+    }
+    function scheduleTheme() {
+      if (themeScheduled) return;
+      themeScheduled = true;
+      requestAnimationFrame(function () {
+        themeScheduled = false;
+        var t = themeAt(lastPointer.x, lastPointer.y);
+        if (t !== lastTheme) {
+          lastTheme = t;
+          cursor.classList.toggle('is-light', t === 'light');
+        }
+      });
+    }
     document.addEventListener('pointermove', function (e) {
       if (e.pointerType === 'touch') return;
+      lastPointer.x = e.clientX; lastPointer.y = e.clientY;
       cursor.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+      scheduleTheme();
       var now = performance.now();
-      if (now - lastEmber > 32) { lastEmber = now; FX.ember(e.clientX, e.clientY); }
+      if (now - lastEmber > 64) { lastEmber = now; FX.ember(e.clientX, e.clientY); }
     }, { passive: true });
+    window.addEventListener('scroll', scheduleTheme, { passive: true });
     document.addEventListener('pointerdown', function () { cursor.classList.add('is-down'); }, { passive: true });
     document.addEventListener('pointerup', function () { cursor.classList.remove('is-down'); }, { passive: true });
     document.addEventListener('pointerleave', function () { cursor.style.opacity = '0'; });
@@ -423,7 +449,40 @@
       if (!cursor) return;
       var hot = e.target.closest && e.target.closest('a,button,input,textarea,label,summary,.tag,.frame,.slot');
       cursor.classList.toggle('is-hot', !!hot);
+      scheduleTheme();
     });
+  }
+
+  /* ─────────────────────────── БЫСТРЫЙ ПЛАВНЫЙ СКРОЛЛ ─────────────────────────── */
+  function initSmoothScroll() {
+    function scrollToEl(el) {
+      var top = el.getBoundingClientRect().top + window.pageYOffset - 70;
+      if (reduced) { window.scrollTo(0, top); return; }
+      var start = window.pageYOffset;
+      var dist = top - start;
+      if (Math.abs(dist) < 4) return;
+      var dur = Math.min(620, Math.max(320, Math.abs(dist) * 0.055));
+      var t0 = performance.now();
+      function step(t) {
+        var k = Math.min(1, (t - t0) / dur);
+        var ease = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+        window.scrollTo(0, Math.round(start + dist * ease));
+        if (k < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      var target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      scrollToEl(target);
+      try { history.replaceState(null, '', '#' + id); } catch (err) {}
+    });
+    NEFOR.scrollToEl = scrollToEl;
   }
 
   /* ─────────────────────────── HUD / КАРМАН ─────────────────────────── */
@@ -846,6 +905,7 @@
     initCursor();
     FX.init();
     initHud();
+    initSmoothScroll();
     initScrollStuff();
     initReveal();
     initStreet();

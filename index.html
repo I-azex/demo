@@ -22,6 +22,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230b0a09'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='34' font-weight='bold' fill='%23c6ff2e' text-anchor='middle'%3E9%3C/text%3E%3C/svg%3E">
 <link rel="preload" href="assets/fonts/rubik-mono-one-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/pt-mono-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/img/hero-stairs.webp" as="image" type="image/webp">
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/sections.css">
@@ -399,7 +400,7 @@
 
       <div class="hero__aside" aria-hidden="true">
         <figure class="polaroid polaroid--a">
-          <img data-photo-slot="hero-a" alt="Подъезд, лето, которую никто не повторит" width="420" height="520" loading="eager">
+          <img data-photo-slot="hero-a" alt="Подъезд, лето, которую никто не повторит" width="420" height="520" loading="eager" fetchpriority="high">
           <figcaption>лето, которое было<br><b>на самом деле</b></figcaption>
         </figure>
         <figure class="polaroid polaroid--b">
@@ -498,6 +499,19 @@
         </div>
 
         <canvas class="viz" id="viz" width="1200" height="160" aria-label="Визуализация звука"></canvas>
+
+        <div class="karaoke" id="karaoke" aria-label="Караоке-текст трека">
+          <div class="karaoke__head">
+            <span>ТЕКСТ · КАРАОКЕ</span>
+            <span class="karaoke__status" id="karaoke-status">без текста</span>
+          </div>
+          <div class="karaoke__screen">
+            <p class="karaoke__prev" id="karaoke-prev"></p>
+            <p class="karaoke__line" id="karaoke-line">включи кассету</p>
+            <p class="karaoke__next" id="karaoke-next"></p>
+          </div>
+          <div class="karaoke__bar" aria-hidden="true"><span id="karaoke-progress"></span></div>
+        </div>
 
         <div class="deck__controls">
           <div class="deck__buttons">
@@ -838,6 +852,7 @@
 </noscript>
 
 <script src="assets/js/photos.js" defer></script>
+<script src="assets/js/lyrics.js" defer></script>
 <script src="assets/js/core.js" defer></script>
 <script src="assets/js/player.js" defer></script>
 <script src="assets/js/sections.js" defer></script>

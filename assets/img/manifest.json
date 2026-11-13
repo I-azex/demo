@@ -10,9 +10,9 @@
   "license": "CC BY-SA 4.0",
   "licenseUrl": "",
   "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%9F%D1%80%D0%BE%D0%B2%D0%B8%D0%B0%D0%BD%D1%82%D1%81%D0%BA%D0%B0%D1%8F_8_%D0%BF%D0%BE%D0%B4%D1%8A%D0%B5%D0%B7%D0%B4,_%D0%BB%D0%B5%D1%81%D1%82%D0%BD%D0%B8%D1%86%D0%B0.jpg",
-  "width": 1133,
-  "height": 1700,
-  "bytes": 228534
+  "width": 666,
+  "height": 1000,
+  "bytes": 70494
  },
  {
   "file": "assets/img/hero-match.webp",
@@ -25,9 +25,9 @@
   "license": "CC BY-SA 4.0",
   "licenseUrl": "",
   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Friction_d%27une_allumette.jpg",
-  "width": 1700,
-  "height": 1275,
-  "bytes": 168750
+  "width": 1000,
+  "height": 750,
+  "bytes": 54804
  },
  {
   "file": "assets/img/stairwell.webp",
@@ -40,9 +40,9 @@
   "license": "CC BY-SA 4.0",
   "licenseUrl": "",
   "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%9F%D1%80%D0%BE%D0%B2%D0%B8%D0%B0%D0%BD%D1%82%D1%81%D0%BA%D0%B0%D1%8F_%D0%B4%D0%BE%D0%BC_8_%D0%BF%D0%BE%D0%B4%D1%8A%D0%B5%D0%B7%D0%B4_%D0%BB%D0%B5%D1%81%D1%82%D0%BD%D0%B8%D1%86%D0%B0.jpg",
-  "width": 1700,
-  "height": 1133,
-  "bytes": 317320
+  "width": 1200,
+  "height": 800,
+  "bytes": 115456
  },
  {
   "file": "assets/img/panelka.webp",
@@ -55,9 +55,9 @@
   "license": "CC BY-SA 3.0",
   "licenseUrl": "",
   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Panel_Khrushchev_house_in_Tomsk.jpg",
-  "width": 1700,
-  "height": 1275,
-  "bytes": 479110
+  "width": 1200,
+  "height": 900,
+  "bytes": 211294
  },
  {
   "file": "assets/img/lighter.webp",
@@ -70,9 +70,9 @@
   "license": "CC0",
   "licenseUrl": "",
   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lighter_2.jpg",
-  "width": 1275,
-  "height": 1700,
-  "bytes": 59740
+  "width": 750,
+  "height": 1000,
+  "bytes": 13652
  },
  {
   "file": "assets/img/cigarette.webp",
@@ -85,9 +85,9 @@
   "license": "CC BY-SA 4.0",
   "licenseUrl": "",
   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cigarette_holder_and_lit_cigarette.jpg",
-  "width": 1700,
-  "height": 1700,
-  "bytes": 286150
+  "width": 1200,
+  "height": 1200,
+  "bytes": 33672
  },
  {
   "file": "assets/img/night-tram.webp",
@@ -100,9 +100,9 @@
   "license": "CC BY 2.0",
   "licenseUrl": "",
   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Moscow_tram_2400_VarioLF_2014_(15228583905).jpg",
-  "width": 1700,
-  "height": 1200,
-  "bytes": 173630
+  "width": 1200,
+  "height": 847,
+  "bytes": 62648
  },
  {
   "file": "assets/img/cassette.webp",
@@ -115,9 +115,9 @@
   "license": "CC0",
   "licenseUrl": "",
   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blank_Maxell_Compact_Cassette_Case_(Front_%E2%80%93_With_Compact_Cassette).jpg",
-  "width": 1700,
-  "height": 1117,
-  "bytes": 177164
+  "width": 1200,
+  "height": 788,
+  "bytes": 68052
  },
  {
   "file": "assets/img/garages.webp",
@@ -130,9 +130,9 @@
   "license": "CC BY-SA 4.0",
   "licenseUrl": "",
   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Row_of_brick_garages_with_graffiti_and_weathered_wooden_doors,_Gillingham_-_mixed_construction_materials_and_overgrown_vegetation.png",
-  "width": 1700,
-  "height": 1275,
-  "bytes": 441662
+  "width": 1200,
+  "height": 900,
+  "bytes": 195342
  },
  {
   "file": "assets/img/streetlamp.webp",
@@ -145,8 +145,8 @@
   "license": "CC BY 2.0",
   "licenseUrl": "",
   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Night,_Street,_Lamp..._(4267111310).jpg",
-  "width": 1133,
-  "height": 1700,
-  "bytes": 52660
+  "width": 800,
+  "height": 1200,
+  "bytes": 14660
  }
 ]
