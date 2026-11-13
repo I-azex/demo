@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kozhuharyov.ru/sitemap.xml
