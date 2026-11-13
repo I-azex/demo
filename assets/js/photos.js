@@ -1,0 +1,123 @@
+/* ПОДЪЕЗД №9 — фотографии: автосгенерировано из assets/img/manifest.json */
+window.NEFOR_PHOTOS = [
+ {
+  "file": "assets/img/hero-stairs.webp",
+  "caption": "",
+  "alt": "Тёмная лестница старого подъезда с граффити",
+  "slot": "hero-a",
+  "wall": false,
+  "title": "Провиантская 8 подъезд, лестница.jpg",
+  "creator": "Olga-lisenkova",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%9F%D1%80%D0%BE%D0%B2%D0%B8%D0%B0%D0%BD%D1%82%D1%81%D0%BA%D0%B0%D1%8F_8_%D0%BF%D0%BE%D0%B4%D1%8A%D0%B5%D0%B7%D0%B4,_%D0%BB%D0%B5%D1%81%D1%82%D0%BD%D0%B8%D1%86%D0%B0.jpg"
+ },
+ {
+  "file": "assets/img/hero-match.webp",
+  "caption": "",
+  "alt": "Спичка загорается в темноте",
+  "slot": "hero-b",
+  "wall": false,
+  "title": "Friction d'une allumette.jpg",
+  "creator": "Yann SEGALEN",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Friction_d%27une_allumette.jpg"
+ },
+ {
+  "file": "assets/img/stairwell.webp",
+  "caption": "наш подъезд. он был таким",
+  "alt": "Лестничная площадка с граффити и мусором",
+  "slot": "",
+  "wall": true,
+  "title": "Провиантская дом 8 подъезд лестница.jpg",
+  "creator": "Olga-lisenkova",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%9F%D1%80%D0%BE%D0%B2%D0%B8%D0%B0%D0%BD%D1%82%D1%81%D0%BA%D0%B0%D1%8F_%D0%B4%D0%BE%D0%BC_8_%D0%BF%D0%BE%D0%B4%D1%8A%D0%B5%D0%B7%D0%B4_%D0%BB%D0%B5%D1%81%D1%82%D0%BD%D0%B8%D1%86%D0%B0.jpg"
+ },
+ {
+  "file": "assets/img/panelka.webp",
+  "caption": "дом, в котором все знали друг друга",
+  "alt": "Панельный дом зимой",
+  "slot": "",
+  "wall": true,
+  "title": "Panel Khrushchev house in Tomsk.jpg",
+  "creator": "No machine-readable author provided. Maximaximax assumed (based on copyright claims).",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Panel_Khrushchev_house_in_Tomsk.jpg"
+ },
+ {
+  "file": "assets/img/lighter.webp",
+  "caption": "последний свет в кармане",
+  "alt": "Рука с зажигалкой в темноте",
+  "slot": "",
+  "wall": true,
+  "title": "Lighter 2.jpg",
+  "creator": "Apurv013",
+  "license": "CC0",
+  "licenseUrl": "",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lighter_2.jpg"
+ },
+ {
+  "file": "assets/img/cigarette.webp",
+  "caption": "пять минут до звонка",
+  "alt": "Сигарета в мундштуке крупным планом",
+  "slot": "",
+  "wall": true,
+  "title": "Cigarette holder and lit cigarette.jpg",
+  "creator": "UnifiedFunctionality",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cigarette_holder_and_lit_cigarette.jpg"
+ },
+ {
+  "file": "assets/img/night-tram.webp",
+  "caption": "трамвай в 23:40",
+  "alt": "Ночной трамвай на улице города",
+  "slot": "",
+  "wall": true,
+  "title": "Moscow tram 2400 VarioLF 2014 (15228583905).jpg",
+  "creator": "Artem Svetlov from Moscow, Russia",
+  "license": "CC BY 2.0",
+  "licenseUrl": "",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Moscow_tram_2400_VarioLF_2014_(15228583905).jpg"
+ },
+ {
+  "file": "assets/img/cassette.webp",
+  "caption": "кассета, которую никто не вернул",
+  "alt": "Кассета Maxell крупным планом",
+  "slot": "",
+  "wall": true,
+  "title": "Blank Maxell Compact Cassette Case (Front – With Compact Cassette).jpg",
+  "creator": "DiscoA340",
+  "license": "CC0",
+  "licenseUrl": "",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blank_Maxell_Compact_Cassette_Case_(Front_%E2%80%93_With_Compact_Cassette).jpg"
+ },
+ {
+  "file": "assets/img/garages.webp",
+  "caption": "гаражи. пахло бензином и свободой",
+  "alt": "Кирпичные гаражи с граффити",
+  "slot": "",
+  "wall": true,
+  "title": "Row of brick garages with graffiti and weathered wooden doors, Gillingham - mixed construction materials and overgrown vegetation.png",
+  "creator": "OathOn",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Row_of_brick_garages_with_graffiti_and_weathered_wooden_doors,_Gillingham_-_mixed_construction_materials_and_overgrown_vegetation.png"
+ },
+ {
+  "file": "assets/img/streetlamp.webp",
+  "caption": "фонарь, который всегда горел",
+  "alt": "Фонарь во дворе ночью",
+  "slot": "",
+  "wall": true,
+  "title": "Night, Street, Lamp... (4267111310).jpg",
+  "creator": "Andrey Belenko from Moscow, Russia",
+  "license": "CC BY 2.0",
+  "licenseUrl": "",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Night,_Street,_Lamp..._(4267111310).jpg"
+ }
+];

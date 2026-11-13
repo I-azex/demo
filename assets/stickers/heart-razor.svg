@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="rotate(-5 60 66)">
+    <path d="M60 103 C36 87 24 70 27 55 C29 43 42 37 53 44 C57 46 59 49 60 52 C61 49 63 46 67 44 C78 37 91 43 93 55 C96 70 84 87 60 103 Z"/>
+  </g>
+  <g transform="translate(60 62) rotate(24)">
+    <path fill="currentColor" fill-rule="evenodd" d="M-32 -5.5 L32 -5.5 C34 -5.5 35 -4.5 35 -2.5 L35 2.5 C35 4.5 34 5.5 32 5.5 L-32 5.5 C-34 5.5 -35 4.5 -35 2.5 L-35 -2.5 C-35 -4.5 -34 -5.5 -32 -5.5 Z M-15 -4 L15 -4 L15 4 L-15 4 Z"/>
+  </g>
+  <path d="M50 104 C48.5 107 49 109.5 50 109.5 C51.5 109.5 52 107 50 104 Z" fill="currentColor"/>
+  <path d="M62 107 C60.5 110 61 113 62 113 C63.5 113 64 110 62 107 Z" fill="currentColor"/>
+  <path d="M72 101 C70 104 70.5 107 72 107 C73.5 107 74 104 72 101 Z" fill="currentColor"/>
+</svg>

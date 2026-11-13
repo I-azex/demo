@@ -1,16 +1,11 @@
-# личные заметки по деплою и домену — не для публикации
-DEPLOY-NOTES.md
-
-# локальное состояние wrangler (содержит id аккаунта Cloudflare)
-.wrangler/
-
-# папка для чистой выгрузки на Pages
-tools/.deploy/
-
-# скриншоты проверки вёрстки — локальный побочный продукт, ~6 МБ
-tools/shots/
-
-# служебные файлы ОС
-Thumbs.db
-desktop.ini
+# рабочие папки и локальный мусор
+_ref/
+_work/
+_probe/
+node_modules/
 .DS_Store
+Thumbs.db
+*.log
+
+preview/
+
